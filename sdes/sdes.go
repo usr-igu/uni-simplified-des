@@ -5,21 +5,24 @@ import (
 )
 
 func SimplifiedDES(plaintext []byte, key []byte) []byte {
+
 	if len(plaintext) != 8 {
 		log.Fatalf("Texto a ser criptografado precisa ter 8 bits: len(plaintext) == %d.", len(plaintext))
 	}
 	if len(key) != 10 {
 		log.Fatalf("Chave de criptografia precisa ter 10 bits: len(plaintext) == %d.", len(plaintext))
 	}
+
 	p10 := p10(key)
 	p10 = lr(p10)
 	p8 := p8(p10)
+
 	return p8
 }
 
 // p10 permuta os bits da chave (10) como especificado no documento S-DES.
 func p10(key []byte) []byte {
-	p10 := append([]byte(nil), key...)
+	p10 := append([]byte(nil), key...) // Cria uma cópia dos bits da chave.
 	p10[0], p10[1], p10[2], p10[3], p10[4] = p10[2], p10[4], p10[1], p10[7], p10[3]
 	p10[5], p10[6], p10[7], p10[8], p10[9] = p10[9], p10[0], p10[8], p10[7], p10[5]
 	return p10
