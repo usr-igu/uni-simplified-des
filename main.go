@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/fuzzyqu/sdes/sdes"
+	"github.com/fuzzyqu/simplified-des/sdes"
 )
 
 func main() {

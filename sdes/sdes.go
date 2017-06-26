@@ -45,20 +45,20 @@ func p8(key []byte) []byte {
 //
 // A permutação é especificada no documento S-DES.
 func ip(txt []byte) []byte {
-	nTxt := make([]byte, 8)
-	nTxt[0], nTxt[1], nTxt[2], nTxt[3] = txt[1], txt[5], txt[2], txt[0]
-	nTxt[4], nTxt[5], nTxt[6], nTxt[7] = txt[3], txt[7], txt[4], txt[6]
-	return nTxt
+	permuText := make([]byte, 8)
+	permuText[0], permuText[1], permuText[2], permuText[3] = txt[1], txt[5], txt[2], txt[0]
+	permuText[4], permuText[5], permuText[6], permuText[7] = txt[3], txt[7], txt[4], txt[6]
+	return permuText
 }
 
 // ipi permuta os bits de plaintext (8) de forma inversa a ip.
 //
 // A permutação é especificada no documento S-DES.
-func ipi(ptxt []byte) []byte {
-	ptxtn := make([]byte, 8)
-	ptxtn[0], ptxtn[1], ptxtn[2], ptxtn[3] = ptxt[3], ptxt[0], ptxt[2], ptxt[4]
-	ptxtn[4], ptxtn[5], ptxtn[6], ptxtn[7] = ptxt[6], ptxt[1], ptxt[7], ptxt[5]
-	return ptxtn
+func ipi(txt []byte) []byte {
+	permuTxt := make([]byte, 8)
+	permuTxt[0], permuTxt[1], permuTxt[2], permuTxt[3] = txt[3], txt[0], txt[2], txt[4]
+	permuTxt[4], permuTxt[5], permuTxt[6], permuTxt[7] = txt[6], txt[1], txt[7], txt[5]
+	return permuTxt
 }
 
 // lr separa a chave (10) em 2 grupos de 5 bits e respectivamente executa uma rotação a esquerda.
@@ -75,8 +75,8 @@ func lr(key []byte) []byte {
 //// todo: Terminar fk.
 //// fk
 //func fk(key []byte) []byte {
-//	fh := append([]byte(nil), key[:len(key)/2]...) // Cria uma cópia da primeira metade dos bits.
-//	sh := append([]byte(nil), key[len(key)/2:]...) // Cria uma cópia da segunda metade dos bits.
+//	result := []byte(nil)
+//	return result
 //}
 
 // sw troca a primeira metade dos bits de key pela segunda.
@@ -84,6 +84,6 @@ func sw(key []byte) []byte {
 	fh := make([]byte, len(key)/2)
 	sh := make([]byte, len(key)/2)
 	copy(fh, key[:len(key)/2]) // Copia a primeira metade dos bits.
-	copy(sh, key[len(key)/2:]) // Copia a cópia da segunda metade dos bits.
+	copy(sh, key[len(key)/2:]) // Copia a segunda metade dos bits.
 	return append(sh, fh...)
 }
