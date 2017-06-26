@@ -4,6 +4,11 @@ import (
 	"log"
 )
 
+// SimplifiedDES criptografa a mensagem plaintext usando o algortimo S-DES.
+//
+// plaintext e key devem possuir 8 e 10 bits, respectivamente.
+//
+// O algoritmo é descrito no documento S-DES.
 func SimplifiedDES(plaintext []byte, key []byte) []byte {
 
 	if len(plaintext) != 8 {
