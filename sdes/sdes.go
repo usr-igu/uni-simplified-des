@@ -63,21 +63,31 @@ func ipi(txt []byte) []byte {
 
 // lr separa a chave (10) em 2 grupos de 5 bits e respectivamente executa uma rotação a esquerda.
 func lr(key []byte) []byte {
-	fh := make([]byte, len(key)/2)
-	sh := make([]byte, len(key)/2)
-	copy(fh, key[:len(key)/2]) // Copia a primeira metade dos bits.
-	copy(sh, key[len(key)/2:]) // Copia a cópia da segunda metade dos bits.
-	fh = append(fh[1:], fh[0]) // Circular left shift na primeira metade.
-	sh = append(sh[1:], sh[0]) // Circular left shift na segunda metade.
-	return append(fh, sh...)
+	firstHalf := make([]byte, len(key)/2)
+	secondHalf := make([]byte, len(key)/2)
+	copy(firstHalf, key[:len(key)/2])  // Copia a primeira metade dos bits.
+	copy(secondHalf, key[len(key)/2:]) // Copia a cópia da segunda metade dos bits.
+	firstHalf = cls(firstHalf, 1)      // Circular left shift na primeira metade.
+	secondHalf = cls(secondHalf, 1)    // Circular left shift na segunda metade.
+	return append(firstHalf, secondHalf...)
 }
 
-//// todo: Terminar fk.
-//// fk
-//func fk(key []byte) []byte {
-//	result := []byte(nil)
-//	return result
-//}
+// cls executa n rotações a esquerda em key.
+func cls(key []byte, n int) []byte {
+	permutedKey := make([]byte, len(key))
+	copy(permutedKey, key)
+	for i := 0; i < n; i++ {
+		permutedKey = append(permutedKey[1:], permutedKey[0])
+	}
+	return permutedKey
+}
+
+// todo: Terminar fk.
+// fk
+func fk(key []byte) []byte {
+	result := []byte(nil)
+	return result
+}
 
 // sw troca a primeira metade dos bits de key pela segunda.
 func sw(key []byte) []byte {
