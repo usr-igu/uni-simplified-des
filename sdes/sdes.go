@@ -192,7 +192,7 @@ func f(n [4]uint8, sk [8]uint8) [4]uint8 {
 	}
 
 	// Executa P4 :)
-	resultado[0], resultado[1], resultado[2], resultado[3] = resultado[1], resultado[3], resultado[2], resultado[0]
+	resultado[0], resultado[1], resultado[3] = resultado[1], resultado[3], resultado[0]
 
 	fmt.Println("f: ", resultado)
 	return resultado
