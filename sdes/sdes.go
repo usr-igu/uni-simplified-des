@@ -2,10 +2,22 @@ package sdes
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 )
 
-func Encrypt(texto [8]uint8, chave [10]uint8) [8]uint8 {
+// todo: Unir as funções de criptografar e descriptografar ?
+
+// Criptografar criptografa um texto utilizando a cifra des simplificada.
+func Criptografar(texto [8]uint8, chave [10]uint8) [8]uint8 {
+
+	// Sanity check xD, apesar de que arrays vão dar true sempre xD.
+	if len(texto) != 8 {
+		log.Fatal("O texto precisa ter 8 bits :c")
+	}
+	if len(chave) != 10 {
+		log.Fatal("A chave precisa ter 10 bits :c")
+	}
 
 	// Primeiro vamos criar as subchaves.
 	chave = p10(chave)
@@ -24,7 +36,8 @@ func Encrypt(texto [8]uint8, chave [10]uint8) [8]uint8 {
 	return textoCifrado
 }
 
-func Decrypt(texto [8]uint8, chave [10]uint8) [8]uint8 {
+// Descriptografar descriptografa um texto cifrado pela cifra des simplificada.
+func Descriptografar(texto [8]uint8, chave [10]uint8) [8]uint8 {
 
 	// Primeiro vamos criar as subchaves.
 	chave = p10(chave)
@@ -34,6 +47,7 @@ func Decrypt(texto [8]uint8, chave [10]uint8) [8]uint8 {
 	k2 := p8(chave)
 
 	// Agora descriptografar o texto!
+	// A única diferença é a ordem de k1/k2.
 	textoDecifrado := ip(texto)
 	textoDecifrado = fk(textoDecifrado, k2)
 	textoDecifrado = sw(textoDecifrado)
