@@ -73,15 +73,20 @@ func fk(texto, sk [8]uint8) [8]uint8 {
 	var lTexto [4]uint8
 	var rTexto [4]uint8
 
+	// Separamos em um par de 4 bits.
 	copy(lTexto[:], texto[:4])
 	copy(rTexto[:], texto[4:])
 
+	// Primeiro aplicamos f nos bits a direita.
 	fBits := f(rTexto, sk)
 
+	// Agora fazemos um XORzinho do resultado de f com os bits da esquerda.
 	for i := range lTexto {
 		lTexto[i] ^= fBits[i]
 	}
 
+	// Pronto, agora colocamos os bits no lugar.
+	// Juntando as duas metades.
 	copy(resultado[:4], lTexto[:])
 	copy(resultado[4:], rTexto[:])
 

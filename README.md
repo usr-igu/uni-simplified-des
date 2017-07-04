@@ -1,5 +1,5 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/fuzzyqu/simplified-des)](https://goreportcard.com/report/github.com/fuzzyqu/simplified-des)
-# S-DES :)
+# Simplified DES :)
 Trabalho para a discliplina de criptografia - 2017/1.
 
 Implementação do [Simplified DES](http://mercury.webster.edu/aleshunas/COSC%205130/G-SDES.pdf)
