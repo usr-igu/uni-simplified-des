@@ -7,11 +7,13 @@ import (
 )
 
 // todo: Unir as funções de criptografar e descriptografar ?
+// todo: Eu gosto da clareza de deixa-las separadas, mas repeat yourself é sempre sad.
 
 // Criptografar criptografa um texto utilizando a cifra des simplificada.
 func Criptografar(texto [8]uint8, chave [10]uint8) [8]uint8 {
 
-	// Sanity check xD, apesar de que arrays vão dar true sempre xD.
+	// Sanity check xD
+	// Isso é meio idiota, arrays vão estar com o tamanho certo sempre.
 	if len(texto) != 8 {
 		log.Fatal("O texto precisa ter 8 bits :c")
 	}
@@ -180,11 +182,11 @@ func f(n [4]uint8, sk [8]uint8) [4]uint8 {
 	s0 := [4][4]uint8{{1, 0, 3, 2}, {3, 2, 1, 0}, {0, 2, 1, 3}, {3, 1, 3, 2}}
 	s1 := [4][4]uint8{{0, 1, 2, 3}, {2, 0, 1, 3}, {3, 0, 1, 0}, {2, 1, 0, 3}}
 
-	// Concatena os bits da linha 0 e transforma em um decimal.
+	// Concatena os bits da linha 0 e transforma em um inteiro.
 	row0, _ := strconv.ParseInt(fmt.Sprintf("%b%b", ep[0], ep[3]), 2, 32)
 	col0, _ := strconv.ParseInt(fmt.Sprintf("%b%b", ep[1], ep[2]), 2, 32)
 
-	// Concatena os bits da linha 1 e transforma em um decimal.
+	// Concatena os bits da linha 1 e transforma em um inteiro.
 	row1, _ := strconv.ParseInt(fmt.Sprintf("%b%b", ep[4], ep[7]), 2, 32)
 	col1, _ := strconv.ParseInt(fmt.Sprintf("%b%b", ep[5], ep[6]), 2, 32)
 
