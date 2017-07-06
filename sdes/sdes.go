@@ -112,7 +112,7 @@ func ipi(texto [8]uint8) [8]uint8 {
 	resultado[0], resultado[1], resultado[2], resultado[3] = texto[3], texto[0], texto[2], texto[4]
 	resultado[4], resultado[5], resultado[6], resultado[7] = texto[6], texto[1], texto[7], texto[5]
 
-	fmt.Println("ipi: ", resultado)
+	fmt.Println("ip^-1: ", resultado)
 	return resultado
 }
 
@@ -123,7 +123,7 @@ func p10(chave [10]uint8) [10]uint8 {
 	resultado[0], resultado[1], resultado[2], resultado[3], resultado[4] = chave[2], chave[4], chave[1], chave[6], chave[3]
 	resultado[5], resultado[6], resultado[7], resultado[8], resultado[9] = chave[9], chave[0], chave[8], chave[7], chave[5]
 
-	fmt.Println("p10: ", resultado)
+	//fmt.Println("p10: ", resultado)
 	return resultado
 }
 
@@ -151,7 +151,7 @@ func shift(chave [10]uint8, n int) [10]uint8 {
 	copy(chave[:5], bitsEsq[:])
 	copy(chave[5:], bitsDir[:])
 
-	fmt.Println("shift: ", chave)
+	//fmt.Println("shift: ", chave)
 	return chave
 }
 
@@ -160,7 +160,7 @@ func p8(chave [10]uint8) [8]uint8 {
 	resultado[0], resultado[1], resultado[2], resultado[3] = chave[5], chave[2], chave[6], chave[3]
 	resultado[4], resultado[5], resultado[6], resultado[7] = chave[7], chave[4], chave[9], chave[8]
 
-	fmt.Println("p8: ", resultado)
+	//fmt.Println("p8: ", resultado)
 	return resultado
 }
 
@@ -182,11 +182,11 @@ func f(n [4]uint8, sk [8]uint8) [4]uint8 {
 	s0 := [4][4]uint8{{1, 0, 3, 2}, {3, 2, 1, 0}, {0, 2, 1, 3}, {3, 1, 3, 2}}
 	s1 := [4][4]uint8{{0, 1, 2, 3}, {2, 0, 1, 3}, {3, 0, 1, 0}, {2, 1, 0, 3}}
 
-	// Concatena os bits da linha 0 e transforma em um inteiro.
+	// Concatena os bits da linha 0 e transforma em inteiros.
 	row0, _ := strconv.ParseInt(fmt.Sprintf("%b%b", ep[0], ep[3]), 2, 32)
 	col0, _ := strconv.ParseInt(fmt.Sprintf("%b%b", ep[1], ep[2]), 2, 32)
 
-	// Concatena os bits da linha 1 e transforma em um inteiro.
+	// Concatena os bits da linha 1 e transforma em inteiros.
 	row1, _ := strconv.ParseInt(fmt.Sprintf("%b%b", ep[4], ep[7]), 2, 32)
 	col1, _ := strconv.ParseInt(fmt.Sprintf("%b%b", ep[5], ep[6]), 2, 32)
 
@@ -201,6 +201,6 @@ func f(n [4]uint8, sk [8]uint8) [4]uint8 {
 	// Executa P4 :)
 	resultado[0], resultado[1], resultado[3] = resultado[1], resultado[3], resultado[0]
 
-	fmt.Println("f: ", resultado)
+	//fmt.Println("f: ", resultado)
 	return resultado
 }
