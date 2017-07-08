@@ -71,26 +71,26 @@ func ip(texto [8]uint8) [8]uint8 {
 
 func fk(texto, sk [8]uint8) [8]uint8 {
 
-	var resultado [8]uint8
-	var lTexto [4]uint8
-	var rTexto [4]uint8
+	resultado := [8]uint8{}
+	eTexto := [4]uint8{}
+	dTexto := [4]uint8{}
 
 	// Separamos em um par de 4 bits.
-	copy(lTexto[:], texto[:4])
-	copy(rTexto[:], texto[4:])
+	copy(eTexto[:], texto[:4])
+	copy(dTexto[:], texto[4:])
 
 	// Primeiro aplicamos f nos bits a direita.
-	fBits := f(rTexto, sk)
+	fBits := f(dTexto, sk)
 
 	// Agora fazemos um XORzinho do resultado de f com os bits da esquerda.
-	for i := range lTexto {
-		lTexto[i] ^= fBits[i]
+	for i := range eTexto {
+		eTexto[i] ^= fBits[i]
 	}
 
 	// Pronto, agora colocamos os bits no lugar.
 	// Juntando as duas metades.
-	copy(resultado[:4], lTexto[:])
-	copy(resultado[4:], rTexto[:])
+	copy(resultado[:4], eTexto[:])
+	copy(resultado[4:], dTexto[:])
 
 	fmt.Println("fk: ", resultado)
 	return resultado

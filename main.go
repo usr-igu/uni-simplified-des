@@ -59,16 +59,16 @@ func main() {
 	fmt.Println("Original:\t", texto)
 	fmt.Println("Decifrado:\t", decifrado)
 
-	// Converte a array de uint8 para uma array de string.
-	decifradoTxt := make([]string, 0, 8)
+	// Converte a array de uint8 para uma slice de string.
+	decifradoSlice := make([]string, 0, 8)
 	for _, v := range decifrado {
-		decifradoTxt = append(decifradoTxt, strconv.Itoa(int(v)))
+		decifradoSlice = append(decifradoSlice, strconv.Itoa(int(v)))
 	}
 
 	// Cria uma string com cada metade da array.
-	e := strings.Join(decifradoTxt[:4], "")
-	d := strings.Join(decifradoTxt[4:], "")
+	e := strings.Join(decifradoSlice[:4], "")
+	d := strings.Join(decifradoSlice[4:], "")
 
 	// Imprime as letras correspondentes.
-	fmt.Printf("Código convertido: '%s'\n", letra(e) + letra(d))
+	fmt.Printf("Código convertido: '%s'\n", letra(e)+letra(d))
 }
